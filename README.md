@@ -109,37 +109,22 @@ For other layouts like French or German:
 
 ### Connect to WiFi
 
-1. **Start `wpa_supplicant` and configure WiFi with `wpa_cli`:**
+1. **Run `nmtui` to connect to wifi using a nice tui:**
 
-   ```sh
-   sudo systemctl start wpa_supplicant
-   wpa_cli
-   ```
-
-   Inside `wpa_cli`, enter:
-
-   ```sh
-   add_network
-   0
-   set_network 0 ssid "myhomenetwork"
-   OK
-   set_network 0 psk "mypassword"
-   OK
-   set_network 0 key_mgmt WPA-PSK
-   OK
-   enable_network 0
-   OK
-   ```
-
-   Then, exit `wpa_cli`:
-
-   ```sh
-   quit
-   ```
+previosly you had to use `wpa_supplicant` and connect to wifi manually but it is no longer necessary
 
 ---
 
 ### Partition the Disk Using `parted`
+
+> **Tip:** For a shorter, more automatic install, use [disko](https://github.com/nix-community/disko). You declare your partitions once and reuse that configuration every time. The entire process becomes two commands:
+>
+> ```sh
+> sudo disko --mode destroy,format,mount /path/to/disko-config.nix
+> sudo nixos-install
+> ```
+>
+> That said, the manual `parted` steps below are recommended for your first install. They teach you what happens under the hood, and the workflow will feel familiar if you are coming from an imperative distro like Arch or Gentoo. also Flakes are not recommended for a first install, but they can be a good addition later if you need them.
 
 **Warning:** Partitioning will erase all data on the disk. Ensure you have backed up any important data before proceeding.
 
@@ -312,7 +297,7 @@ swapon /dev/vg0/nixos-swap
    If you don’t have your own configuration file, you can download mine for reference:
 
    ```sh
-   curl -o /mnt/etc/nixos/configuration.nix https://raw.githubusercontent.com/titanknis/Nixos-Installation-Guide/main/configuration.nix
+   curl -o /mnt/etc/nixos/configuration.nix https://raw.githubusercontent.com/aliknis/Nixos-Installation-Guide/main/configuration.nix
    ```
 
    **Note:** This file is customized for my setup. Common changes you might need to make include:
@@ -324,7 +309,7 @@ swapon /dev/vg0/nixos-swap
    For creating your own configuration, follow these steps:
    1. **Learn the Basics:** Begin with the [Nix Language Tutorial](https://nix.dev/tutorials/nix-language.html "Nix.dev official Nix language basics") to understand the fundamentals of Nix.
    2. **Consult the Manual:** Read the relevant sections of the [NixOS Official Manual](https://nixos.org/manual/nixos/stable/ "The official NixOS Manual for the stable channel") for information specific to your setup.
-   3. **Refer to My Configuration File:** You can view [my configuration file](https://github.com/titanknis/Nixos-Installation-Guide/blob/main/configuration.nix "I hope you find this as helpful as I found others' configs. Take whatever you need from it."). It’s thoroughly commented to guide you through the setup. Feel free to adapt it to suit your own needs.
+   3. **Refer to My Configuration File:** You can view [my configuration file](https://github.com/titanknis/Nixos-Installation-Guide/blob/main/configuration.nix "I hope you find this as helpful as I found others' configs. Take whatever you need from it.").
 
    **Further Learning:**
 

@@ -96,56 +96,28 @@ Once in the menu:
 The **US layout** is chosen by default.
 
 ```sh
-sudo loadkeys mod-dh-ansi-us
+loadkeys mod-dh-ansi-us
 ```
 
 For other layouts like French or German:
 
-- **French**: `sudo loadkeys fr`
-- **German**: `sudo loadkeys de`
+- **French**: `loadkeys fr`
+- **German**: `loadkeys de`
 
 ### Connect to WiFi
 
-1. **Start `wpa_supplicant` and configure WiFi with `wpa_cli`:**
+1. **Run `nmtui` to connect to wifi using a nice tui:**
 
-   ```sh
-   sudo systemctl start wpa_supplicant
-   wpa_cli
-   ```
+previosly you had to use `wpa_supplicant` and connect to wifi manually but it is no longer necessary
 
-   Inside `wpa_cli`, enter:
-
-   ```sh
-   add_network
-   0
-   set_network 0 ssid "myhomenetwork"
-   OK
-   set_network 0 psk "mypassword"
-   OK
-   set_network 0 key_mgmt WPA-PSK
-   OK
-   enable_network 0
-   OK
-   ```
-
-   Then, exit `wpa_cli`:
-
-   ```sh
-   quit
-   ```
+---
 
 ---
 
 ### Clone you configuration flake
 
 ```sh
-nix-shell -p git
-```
-
-```sh
-cd
-git clone https://github.com/titanknis/nixos.git
-exit
+git clone https://github.com/aliknis/nixos.git
 ```
 
 ---
@@ -155,7 +127,9 @@ exit
 **Warning:** Partitioning will erase all data on the disk. Ensure you have backed up any important data before proceeding.
 
 ```sh
-sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode destroy,format,mount ~/nixos/modules/disko.nix
+nix-shell -p disko
+disko --mode destroy,format,mount ~/nixos/modules/disko.nix
+exit
 ```
 
 _Note: Replace `~/nixos/modules/nixos/disko.nix` with the path to your own disko configuration file if it's different._

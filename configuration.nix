@@ -26,7 +26,6 @@
 
   # Pick only one of the below networking options.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Set your time zone.
   time.timeZone = "Africa/Tunis";
@@ -56,13 +55,6 @@
   # Enable the SDDM display manager
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
-  services.displayManager.defaultSession = "plasma"; # Set the default session to Plasma Wayland
-
-  # Enable sound.
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
@@ -78,9 +70,9 @@
   users.defaultUserShell = pkgs.zsh;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.titanknis = {
+  users.users.aliknis = {
     isNormalUser = true;
-    home = "/home/titanknis";
+    home = "/home/aliknis";
     extraGroups = [
       "wheel" # Enable ‘sudo’ for the user.
       "networkmanager"
@@ -135,6 +127,6 @@
   # and migrated your data accordingly.
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "25.05"; # Did you read the comment?
+  system.stateVersion = "26.05"; # Did you read the comment?
 
 }
